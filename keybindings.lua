@@ -29,13 +29,13 @@ Mappings = {
       "TOOL_PEN_SIZE_THICK",
     }
   },
-  raw = { -- You must respect AllEnabled manually in raw
-    ["f"] = function () -- toggle between blue and black
+  raw = { 
+    ["f"] = function () 
       changePen("MEDIUM", 0x000000)
       RedPenNext = true
     end,
 
-    ["p"] = function () -- toggle between blue and black
+    ["p"] = function ()
       changePen("MEDIUM", 0x3333cc)
       RedPenNext = true
     end,
