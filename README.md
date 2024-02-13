@@ -37,4 +37,4 @@ be toggled on tab). You can stop this from happening permanently by editing `mai
 (look for `registerUi` with the menu "Toggle shortcuts enabled").
 
 # Further Plugins Stuff
-[https://xournalpp.github.io/guide/plugins/plugins/]
+https://xournalpp.github.io/guide/plugins/plugins/
