@@ -7,7 +7,7 @@ folder in that repository.
 
 ```
 plugins
-├── keybindings
+├── xournal-shortcuts
 │   ├── actions.txt
 │   ├── keybindings.lua
 │   ├── main.lua
