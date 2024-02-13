@@ -1,4 +1,4 @@
-require("keybindings.lua")
+require("keybindings")
 
 function changePen(size, color)
     print("Chaning pen to have size " .. size .. " and color " .. color)
