@@ -12,7 +12,6 @@ Mappings = {
     ["r"] = "COPY",
     ["s"] = "PASTE",
     ["t"] = "TOOL_SELECT_RECT",
-    ["g"] = "RULER",
 
     ["<Ctrl>t"] = "TOOL_SELECT_REGION",
 
@@ -40,10 +39,6 @@ Mappings = {
       { "TOOL_DRAW_ARROW", true },
       { "TOOL_DRAW_ARROW", false },
     },
-    ["g"] = {
-      { "RULER", true },
-      { "RULER", false },
-    }
   },
   raw = {
     -- You can call 'actions' by using app.uiAction. 
@@ -70,6 +65,21 @@ Mappings = {
       end
 
       RedPenNext = not RedPenNext
+    end,
+
+    ["g"] = function () -- example of manually implementing a toggle style function
+      if not RulerEnabled then
+        app.uiAction({ action = "ACTION_RULER" })
+        print("ruler enabled")
+      else
+        -- This is a weird workaround, since it seems you can't normally disable the ruler
+        app.uiAction({ action = "ACTION_TOOL_DRAW_ARROW", enabled = true })
+        app.uiAction({ action = "ACTION_TOOL_DRAW_ARROW", enabled = false })
+
+        print("disabled ruler") -- you can see this if you launch xournalpp from the cmdline
+      end
+
+      RulerEnabled = not RulerEnabled
     end,
   }
 }

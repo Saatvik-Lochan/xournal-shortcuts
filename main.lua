@@ -1,10 +1,25 @@
 require("keybindings")
 
 function changePen(size, color)
-    print("Chaning pen to have size " .. size .. " and color " .. color)
-      app.changeToolColor({ color = color, tool = "pen", selection = true })
-      app.uiAction({ action = "ACTION_TOOL_PEN" })
-      app.uiAction({ action = "ACTION_TOOL_PEN_SIZE_" .. size })
+  print("Chaning pen to have size " .. size .. " and color " .. color)
+    app.changeToolColor({ color = color, tool = "pen", selection = true })
+    app.uiAction({ action = "ACTION_TOOL_PEN" })
+    app.uiAction({ action = "ACTION_TOOL_PEN_SIZE_" .. size })
+end
+
+
+function checkUniqueness(mappings)
+  local exising = {}
+
+  for _, t in pairs({ "actions", "raw", "cycle", }) do
+    for k in pairs(mappings[t]) do
+      if exising[k] then 
+        error("You have a duplicate keybinding for " .. k)
+      end
+
+      exising[k] = true
+    end
+  end
 end
 
 -- If AllEnabled is false, all of shortcuts apart from the toggle are disabled
@@ -47,6 +62,8 @@ end
 
 function initUi()
   local index = 1
+
+  checkUniqueness(Mappings)
 
   for shortcut, action in pairs(Mappings.actions) do
     local func_name = "action" .. tostring(index)
