@@ -1,19 +1,18 @@
 Mappings = {
   actions = {
+    -- Find list of possible actions in 'actions.txt'
     -- Top row
     ["q"] = "DELETE",
     ["w"] = "UNDO",
-    -- f, p in raw
     ["b"] = "TOOL_ERASER",
 
     ["<Ctrl>w"] = "REDO",
 
     -- Middle row
-    ["a"] = "TOOL_DRAW_ARROW",
     ["r"] = "COPY",
     ["s"] = "PASTE",
     ["t"] = "TOOL_SELECT_RECT",
-    ["g"] = "TOOL_LINE_STYLE_PLAIN",
+    ["g"] = "RULER",
 
     ["<Ctrl>t"] = "TOOL_SELECT_REGION",
 
@@ -21,18 +20,41 @@ Mappings = {
     ["x"] = "TEX",
 
     -- Lower rows 
-    ["d"] = "TOOL_HAND", -- I think space is already bound to something
+    ["d"] = "TOOL_HAND",
+
+    -- I don't think you can bind "space"
   },
   cycle = {
+    -- Note that binds described here maintain their own toggle state
+    -- i.e. They blindly switch between the two actions, regardless of what
+    -- state xournal is currently in. 
+    --
+    -- An example would be toggle DRAW_ARROW to 'true', then externally disabling it.
+    -- The next time you toggle DRAW_ARROW it fill set it to 'false' even if the arrow
+    -- tool is currently not selected
     ["]"] = {
-      "TOOL_PEN_SIZE_MEDIUM", -- these could be of the form { "SIZE_MEDIUM", false } to set the enable state
+      "TOOL_PEN_SIZE_MEDIUM",
       "TOOL_PEN_SIZE_THICK",
+    },
+    ["a"] = { -- basic toggle pattern
+      { "TOOL_DRAW_ARROW", true },
+      { "TOOL_DRAW_ARROW", false },
+    },
+    ["g"] = {
+      { "RULER", true },
+      { "RULER", false },
     }
   },
-  raw = { 
-    ["f"] = function () 
-      changePen("MEDIUM", 0x000000)
-      RedPenNext = true
+  raw = {
+    -- You can call 'actions' by using app.uiAction. 
+    -- E.g. app.uiAction({ action = "ACTION_TOOL_HAND", enabled = true })
+    -- Note that I prepended ACTION_ to the action 'TOOL_HAND' shown in actions.txt
+    --
+    -- See the lua reference for more information: https://www.lua.org/manual/
+    --
+    ["f"] = function ()
+      changePen("MEDIUM", 0x000000) -- convenience function, check README for option on thickness
+      RedPenNext = true -- variables are global, if you don't prepend a 'local' to them
     end,
 
     ["p"] = function ()
