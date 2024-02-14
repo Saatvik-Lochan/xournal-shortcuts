@@ -30,7 +30,7 @@ You can use letters such as 'a', 'b', and so on to bind keys to, and you can als
 So keep away from using '<Ctrl>' unless you know nothing is bound to it.
 
 Read my example config in `keybindgs.lua` to get a better idea. Note that I use colemak (not qwerty), so most of the default
-keybindgs will probably not suit your needs.
+keybindings will probably not suit your needs.
 
 If the plugin suddenly stops working, then you've probably accidentally disabled all the keyboard shortcuts (this is bound to
 be toggled on tab). You can stop this from happening permanently by editing `main.lua` 

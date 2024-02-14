@@ -4,7 +4,6 @@ Mappings = {
     -- Top row
     ["q"] = "DELETE",
     ["w"] = "UNDO",
-    ["b"] = "TOOL_ERASER",
 
     ["<Ctrl>w"] = "REDO",
 
@@ -16,10 +15,11 @@ Mappings = {
     ["<Ctrl>t"] = "TOOL_SELECT_REGION",
 
     ["e"] = "TOOL_TEXT",
-    ["x"] = "TEX",
 
     -- Lower rows 
+    ["v"] = "TOOL_ERASER",
     ["d"] = "TOOL_HAND",
+    ["x"] = "TEX",
 
     -- I don't think you can bind "space"
   },
@@ -46,7 +46,8 @@ Mappings = {
     -- Note that I prepended ACTION_ to the action 'TOOL_HAND' shown in actions.txt
     --
     -- See the lua reference for more information: https://www.lua.org/manual/
-    --
+    -- xournal++ plugin reference: https://xournalpp.github.io/guide/plugins/plugins/
+
     ["f"] = function ()
       changePen("MEDIUM", 0x000000) -- convenience function, check README for option on thickness
       RedPenNext = true -- variables are global, if you don't prepend a 'local' to them
@@ -57,7 +58,7 @@ Mappings = {
       RedPenNext = true
     end,
 
-    ["v"] = function ()
+    ["b"] = function ()
       if RedPenNext then
         changePen("MEDIUM", 0xff0000)
       else
